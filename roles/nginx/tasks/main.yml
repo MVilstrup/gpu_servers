@@ -1,0 +1,43 @@
+---
+ - name: install Nginx
+   apt: pkg={{item}} state=installed update_cache=true
+   with_items:
+     - nginx
+     - python-passlib
+
+ - name: Add updated nginx.conf file
+   sudo: yes
+   action: copy src=nginx.conf dest=/etc/nginx/nginx.conf owner=ubuntu group=ubuntu mode=644 validate="nginx -t -c %s"
+   notify: restart nginx
+
+ - name: Remove Default Site Configuration
+   sudo: yes
+   file: path=/etc/nginx/sites-enabled/default state=absent
+   notify: restart nginx
+
+ # create a directory if it doesn't exist
+ - name: Ensure sites-enabled exists
+   file:
+    path: /etc/nginx/sites-enabled
+    state: directory
+    mode: 0755
+
+ - name: Add user and password to NginX
+   htpasswd:
+    path: /etc/nginx/.htpasswd
+    name: "{{ jupyter_user_name }}"
+    password: "{{ jupyter_password }}"
+    owner: ubuntu
+    group: www-data
+    mode: 0640
+
+ - name: Add jupyter.conf file
+   sudo: yes
+   copy: src=jupyter-nginx.conf dest=/etc/nginx/sites-enabled/jupyter.conf owner=ubuntu group=ubuntu mode=644
+   notify: restart nginx
+
+ - name: Start Nginx
+   sudo: yes
+   service:
+    name: nginx
+    state: started

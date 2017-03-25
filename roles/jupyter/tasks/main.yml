@@ -1,0 +1,68 @@
+ - apt_repository: repo='ppa:fkrull/deadsnakes' state=present
+   when: ansible_distribution in [ 'Ubuntu' ]
+
+ - apt_key: id=C7917B12 keyserver=keyserver.ubuntu.com
+   when: ansible_distribution in [ 'Ubuntu' ]
+
+ - name: Ensure Basic Packages installed
+   apt: pkg={{ item }} state=installed
+   with_items:
+   - python3.5
+   - python3.5-dev
+   - libncurses5-dev
+   - python-dev
+   - python-pip
+   - python3-pip
+   - python3-dev
+   - python3-matplotlib
+   - python3-scipy
+   - python3-numpy
+   - python3-pandas
+   - libpq-dev
+   - supervisor
+
+ - name: download foo.conf
+   get_url: url=https://bootstrap.pypa.io/get-pip.py
+      dest=/usr/local/get-pip.py mode=0644
+
+ - name: create pip3
+   command: python3 /usr/local/get-pip.py
+    creates=/usr/local/bin/pip3
+
+ - name: install setuptools with pip3
+   command: pip3 install setuptools --upgrade
+
+ - name: install jupyter and other packages
+   command: "pip3 install --upgrade {{item}}"
+   with_items:
+     - ipython[all]
+     - jupyter[all]
+     - jupyter_core
+     - jinja2
+     - zmq
+     - tornado
+     - jsonschema
+     - pandas
+     - scikit-learn
+
+ # create a directory if it doesn't exist
+ - name: Ensure supervisor conf folder exists
+   file:
+    path: "{{item}}"
+    state: directory
+    mode: 0755
+   with_items:
+    - /etc/supervisor
+    - /etc/supervisor/conf.d
+    - /home/ubuntu/.jupyter/
+
+ - name: Add templates
+   sudo: yes
+   template: src='{{ item.src }}' dest='{{ item.dest }}' owner=ubuntu group=ubuntu mode=644
+   with_items:
+     - {src: 'jupyter-supervisor.conf', dest: '/etc/supervisor/conf.d/jupyter.conf'  }
+     - {src: 'jupyter_notebook_config.py', dest: '/home/ubuntu/.jupyter/jupyter_notebook_config.py' }
+
+ - name: restart supervisor
+   sudo: yes
+   shell: service supervisor restart; supervisorctl status

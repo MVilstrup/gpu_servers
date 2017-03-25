@@ -1,0 +1,14 @@
+ec2_keypair: "secret_key"
+ec2_security_group: "jupyter_security_group"
+ec2_instance_type: "t2.nano" # The type of machine which should be started
+ec2_image: "ami-115d7777" # Ubuntu 14.04 Image, which is a requirement to install the various packages
+ec2_subnet_ids: ['subnet-c09deaa5','subnet-522a9b0b','subnet-3ea33c49']
+ec2_region: "eu-west-1" # The region the machines should be started in
+ec2_tag_Name: "deep_learning"
+ec2_tag_Type: "deep_learning"
+ec2_tag_Environment: "education"
+ec2_port: 8888 # The port at which jupyter should run
+ec2_volume_size: 24 # The hard disc size
+ec2_amount: 1 # The amount of machines which should boot
+
+local_ip_address: 0.0.0.0 #0.0.0.0 for access everywhere

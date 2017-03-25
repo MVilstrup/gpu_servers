@@ -1,0 +1,45 @@
+---
+#
+# Restart instances specified by tag
+#
+  - name: Stop all created EC2 nodes
+    hosts: local
+    connection: local
+    gather_facts: False
+    pre_tasks:
+     - include_vars: "{{item}}"
+       with_items:
+         - vars/ec2.yml
+         - vars/jupyter.yml
+         - vars/deep_learning.yml
+    tasks:
+      - name: Find all instances named {{ ec2_tag_Name }} in {{ ec2_region }}
+        # Gather facts about all running ec2 instances with a tag of Name:Example
+        ec2_remote_facts:
+          region: "{{ ec2_region }}"
+          filters:
+            instance-state-name: running
+            "tag:Name": "{{ec2_tag_Name}}"
+        register: ec2
+
+      - name: Remove instances from host file
+        local_action: lineinfile dest="./hosts" regexp="{{ item.public_ip_address }}.*" insertafter="[launched]" line=""
+        with_items:
+          - "{{ ec2.instances }}"
+
+      - name: Remove instances from IP-address file
+        local_action: lineinfile dest="./ips" regexp="{{ item.public_ip_address }}/{{ ec2_port }}" insertafter="[launched]" line=""
+        with_items:
+          - "{{ ec2.instances }}"
+
+      - name: Stopping instances
+        local_action:
+          module: ec2
+          region: "{{ ec2_region }}"
+          instance_tags:
+              Name: "{{ec2_tag_Name}}"
+          state: absent
+          instance_ids: '{{ item.id }}'
+          wait: True
+        with_items:
+          - "{{ ec2.instances }}"
