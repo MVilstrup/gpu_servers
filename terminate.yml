@@ -28,7 +28,7 @@
           - "{{ ec2.instances }}"
 
       - name: Remove instances from IP-address file
-        local_action: lineinfile dest="./ips" regexp="{{ item.public_ip_address }}/{{ ec2_port }}" insertafter="[launched]" line=""
+        local_action: lineinfile dest="./ips" regexp="{{ item.public_ip_address }}" insertafter="[launched]" line=""
         with_items:
           - "{{ ec2.instances }}"
 

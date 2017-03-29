@@ -56,13 +56,19 @@
     - /etc/supervisor/conf.d
     - /home/ubuntu/.jupyter/
 
- - name: Add templates
+ - name: Add supervisor template
    sudo: yes
    template: src='{{ item.src }}' dest='{{ item.dest }}' owner=ubuntu group=ubuntu mode=644
    with_items:
      - {src: 'jupyter-supervisor.conf', dest: '/etc/supervisor/conf.d/jupyter.conf'  }
+
+ - name: Add notebook template
+   template: src='{{ item.src }}' dest='{{ item.dest }}' owner=ubuntu group=ubuntu mode=644
+   with_items:
      - {src: 'jupyter_notebook_config.py', dest: '/home/ubuntu/.jupyter/jupyter_notebook_config.py' }
 
  - name: restart supervisor
-   sudo: yes
    shell: service supervisor restart; supervisorctl status
+
+ - name: restart nginx
+   service: name=nginx state=restarted
