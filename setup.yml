@@ -22,8 +22,8 @@
     gather_facts: True  #We need to re-enable this, as we turned it off earlier.
     tasks:
     roles:
-      - java
-      - cudnn
+      #- java
+      #- cudnn
       - nginx
       - jupyter
       - deep_learning

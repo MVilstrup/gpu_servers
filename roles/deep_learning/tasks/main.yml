@@ -14,7 +14,7 @@
         - tensorflow-gpu
         - tflearn
         - keras
-        - theano
-        - lasagne
-        - gpustat
-        - scikit-image
+        #- theano
+        #- lasagne
+        #- gpustat
+        #- scikit-image

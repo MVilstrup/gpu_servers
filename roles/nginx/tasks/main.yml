@@ -4,6 +4,9 @@
    with_items:
      - nginx
      - python-passlib
+     - unzip
+     - p7zip-full
+     - zip
 
  - name: Add updated nginx.conf file
    sudo: yes
@@ -41,3 +44,6 @@
    service:
     name: nginx
     state: started
+
+ - name: add zip file
+   copy: src=zip.sh dest=/home/ubuntu/ owner=ubuntu group=ubuntu mode=644
