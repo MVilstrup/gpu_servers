@@ -1,0 +1,13 @@
+---
+# tasks file for ansible-tensorflow
+
+    - name: Ensure git is installed
+      apt: pkg=git state=installed
+
+    - name: Pull Tensorflow Examples from github
+      git:
+       repo: https://github.com/MVilstrup/02456-deep-learning
+       dest: /home/ubuntu/deep_learning
+
+    - name: Change ownership
+      shell: sudo chown -R ubuntu /home/ubuntu/deep_learning
