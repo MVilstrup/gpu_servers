@@ -24,7 +24,8 @@
     roles:
       #- java
       #- cudnn
-      - nginx
-      - jupyter
+      #- python
+      #- nginx
+      #- jupyter
       - deep_learning
       - github
