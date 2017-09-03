@@ -11,7 +11,7 @@
       command: "sudo pip3 install --upgrade {{item}}"
       with_items:
         #- tensorflow
-        - tensorflow-gpu
+        - tensorflow-gpu==1.2.0
         - tflearn
         - keras
         #- theano

@@ -8,6 +8,8 @@
       git:
        repo: https://github.com/DeepLearningDTU/02456-deep-learning.git
        dest: /home/ubuntu/deep_learning
+       force: yes
+       update: yes
 
     - name: Change ownership
       shell: sudo chown -R ubuntu /home/ubuntu/deep_learning

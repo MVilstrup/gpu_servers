@@ -37,7 +37,8 @@
           region: "{{ ec2_region }}"
           monitoring: yes
           vpc_subnet_id: "{{ ec2_subnet_ids|random }}"
-          assign_public_ip: yes
+          #vpc_subnet_id: "{{ ec2_subnet_ids }}"
+          assign_public_ip: no
           instance_tags: '{"Name":"{{ec2_tag_Name}}","Type":"{{ec2_tag_Type}}","Environment":"{{ec2_tag_Environment}}"}'
           wait: true
           count: "{{ ec2_amount }}"
