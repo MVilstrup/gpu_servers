@@ -1,7 +1,0 @@
----
-- name: restart nginx
-  service: name=nginx state=restarted
-  
-- name: restart supervisor
-  shell: service supervisor restart; supervisorctl status
-  sudo: yes

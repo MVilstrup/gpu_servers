@@ -1,3 +1,6 @@
+# Structure
+The code is structured into two parts. The basis setup and the notebook setup. The basis setup is used to create a server with the basic tools installed such as CuDNN and Cuda. This can then be used as an Image in the notebook_setup. The notebook_setup is used to quickly setup configured servers with the newest code from github.
+
 # Usage
 ## Start
 In order to setup the servers one first has to run the command:
@@ -18,56 +21,5 @@ along side several deep learning frameworks. This takes some time, since it has 
 download CUDA.
 
 ## Termination
-When the servers are no longer needed, 
+When the servers are no longer needed,
 ansible-playbook terminate.yml --extra-vars "ansible_python_interpreter=/Path/To/Python/interpreter"
-
-## Regions
-
-
-## Instance types
-### Mini types
-|    Type     |  CPU AMOUNT   | GPU  AMOUNT  | Memory (Gb)  |
- ------------ | :-----------: | -----------: | -----------: |
-t2.nano       |    1          |       0      |  0,5         |
-t2.micro	    |   1	          |       0      |  1           |
-t2.small      |  1            |       0      |  2           |
-t2.medium     |  2            |       0      |  4           |
-
-
-Modèle GPU
-
-vCPU
-
-Mém. (Gio)
-
-Mémoire GPU (Gio)
-
-p2.xlarge
-
-1
-
-4
-
-61
-
-12
-
-p2.8xlarge
-
-8
-
-32
-
-488
-
-96
-
-p2.16xlarge
-
-16
-
-64
-
-732
-
-192

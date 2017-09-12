@@ -1,0 +1,4 @@
+---
+jupyter_unix_user: jupyter
+jupyter_unix_group: jupyter
+jupyter_root: "/home/ubuntu/"

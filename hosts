@@ -1,6 +1,0 @@
-[local]
-localhost
-
-[launched]
-54.76.5.205 ansible_ssh_pass="" ansible_ssh_user=ubuntu ansible_ssh_private_key_file=~/.ssh/deep_learning_key.pem
-

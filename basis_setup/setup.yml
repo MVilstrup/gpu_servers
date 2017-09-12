@@ -1,0 +1,29 @@
+  - name: Install python on all machines
+    hosts: launched
+    become: True
+    remote_user: ubuntu
+    gather_facts: no
+    pre_tasks:
+      - name: 'install python2'
+        raw: sudo apt-get -y install python-simplejson
+      - name: Switch to public mirror to speed up apt-get
+        raw: sudo sed -i 's;eu-west-1.ec2.archive.ubuntu.com;eu.archive.ubuntu.com;' /etc/apt/sources.list
+
+  - name: With the newly provisioned EC2 node configure that thing
+    pre_tasks:
+     - include_vars: "{{item}}"
+       with_items:
+         - vars/ec2.yml
+         - vars/jupyter.yml
+         - vars/deep_learning.yml
+    hosts: launched # This uses the hosts that we put into the in-memory hosts repository with the add_host module.
+    become: True
+    remote_user: ubuntu # This is the username for all ubuntu images, rather than root, or something weird.
+    gather_facts: True  #We need to re-enable this, as we turned it off earlier.
+    tasks:
+    roles:
+      - java
+      - cudnn
+      - python
+      - nginx
+      - jupyter
