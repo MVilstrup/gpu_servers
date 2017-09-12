@@ -14,7 +14,6 @@
         - tensorflow-gpu==1.2.0
         - tflearn
         - keras
-        - h5py
         #- theano
         #- lasagne
         #- gpustat

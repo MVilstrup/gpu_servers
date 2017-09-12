@@ -11,5 +11,8 @@
        force: yes
        update: yes
 
+    - name: Install all the packages listed in requirements.txt
+      shell: sudo pip3 install -r /home/ubuntu/deep_learning/requirements.txt
+
     - name: Change ownership
       shell: sudo chown -R ubuntu /home/ubuntu/deep_learning
