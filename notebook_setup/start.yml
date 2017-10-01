@@ -10,8 +10,6 @@
      - include_vars: "{{item}}"
        with_items:
          - vars/ec2.yml
-         - vars/jupyter.yml
-         - vars/deep_learning.yml
 
     tasks:
       - name: Create an EC2 key

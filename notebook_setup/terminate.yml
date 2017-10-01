@@ -10,8 +10,6 @@
      - include_vars: "{{item}}"
        with_items:
          - vars/ec2.yml
-         - vars/jupyter.yml
-         - vars/deep_learning.yml
     tasks:
       - name: Find all instances named {{ ec2_tag_Name }} in {{ ec2_region }}
         # Gather facts about all running ec2 instances with a tag of Name:Example

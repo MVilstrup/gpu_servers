@@ -1,1 +1,2 @@
-cudnn_file: "cudnn-8.0-linux-x64-v5.1.tgz"
+CUDA_REPO_PKG: "cuda-repo-ubuntu1604_8.0.61-1_amd64.deb"
+CUDNN_TAR_FILE: "cudnn-8.0-linux-x64-v6.0.tgz"
