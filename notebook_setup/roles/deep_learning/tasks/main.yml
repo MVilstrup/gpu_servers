@@ -16,5 +16,13 @@
         - keras
         - theano
         - lasagne
-        #- gpustat
+        - gym
+        - git+https://github.com/jakevdp/JSAnimation.git
+        - gpustat
         #- scikit-image
+
+    - name: Create gtop alias
+      lineinfile:
+        dest=/home/ubuntu/.bashrc
+        line="alias gtop='watch --color -n 1.0 gpustat'"
+        owner=ubuntu
