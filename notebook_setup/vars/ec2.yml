@@ -11,4 +11,4 @@ ec2_tag_Type: "deep_learning_mvk"
 ec2_tag_Environment: "education_mvk"
 ec2_port: 8888 # The port at which jupyter should run
 ec2_volume_size: 25 # The hard disc size
-ec2_amount: 30 # The amount of machines which should boot
+ec2_amount: 2 # The amount of machines which should boot
